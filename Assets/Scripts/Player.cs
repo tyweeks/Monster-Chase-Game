@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
 
     private void CheckForJump()
     {
-        if (Input.GetButtonDown("Jump") ||  Input.GetAxisRaw("Vertical") > 0)
+        if (Input.GetButtonDown("Jump"))
         {
             doJump = true;
         }
@@ -91,8 +91,8 @@ public class Player : MonoBehaviour
     {
         if (doJump && isGrounded)
         {
-            isGrounded = false;
             myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            isGrounded = false;
         }
         doJump = false;
     }
