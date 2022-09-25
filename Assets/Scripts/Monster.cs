@@ -10,8 +10,6 @@ public class Monster : MonoBehaviour
     void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
-
-        speed = 7;
     }
 
     void FixedUpdate()
