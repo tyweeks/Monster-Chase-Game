@@ -17,7 +17,8 @@ public class Player : MonoBehaviour
     private Animator anim;
     private string WALK_ANIMATION = "Walk";
 
-    private bool isGrounded = true;
+    private bool isGrounded;
+    private bool doJump;
     private string GROUND_TAG = "Ground";
 
     private void Awake()
@@ -39,6 +40,13 @@ public class Player : MonoBehaviour
     {
         PlayerMoveKeyboard();
         AnimatePlayer();
+        CheckForJump();
+        KeepPlayerUpright();
+    }
+
+    private void KeepPlayerUpright()
+    {
+        transform.rotation = Quaternion.identity;
     }
 
     private void FixedUpdate()
@@ -71,13 +79,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void CheckForJump()
+    {
+        if (Input.GetButtonDown("Jump") ||  Input.GetAxisRaw("Vertical") > 0)
+        {
+            doJump = true;
+        }
+    }
+
     void PlayerJump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (doJump && isGrounded)
         {
             isGrounded = false;
             myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
+        doJump = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
