@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [HideInInspector]
+    public float speed;
+
+    private Rigidbody2D myBody;
+
+    void Awake()
     {
-        
+        myBody = GetComponent<Rigidbody2D>();
+
+        speed = 7;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        myBody.velocity = new Vector2(speed, myBody.velocity.y);
     }
 }

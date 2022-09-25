@@ -41,12 +41,6 @@ public class Player : MonoBehaviour
         PlayerMoveKeyboard();
         AnimatePlayer();
         CheckForJump();
-        KeepPlayerUpright();
-    }
-
-    private void KeepPlayerUpright()
-    {
-        transform.rotation = Quaternion.identity;
     }
 
     private void FixedUpdate()
